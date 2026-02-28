@@ -1,0 +1,17 @@
+<h1>Classement</h1>
+
+<div class="card">
+  @if (classement().length > 0) {
+    @for (joueur of classement(); track joueur.utilisateur; let i = $index) {
+      <div style="padding: 8px 0; border-bottom: 1px solid #374151">
+        <strong>#{{ i + 1 }}</strong>
+        {{ joueur.utilisateur }}
+        - {{ joueur.totalPoints }} points
+      </div>
+    }
+  } @else {
+    <p>Aucun participant.</p>
+  }
+</div>
+
+<button class="secondary" (click)="retour()">Retour aux sessions</button>

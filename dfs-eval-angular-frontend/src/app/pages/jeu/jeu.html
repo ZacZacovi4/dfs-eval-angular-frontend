@@ -1,0 +1,33 @@
+<div class="card" style="text-align: center">
+  @if (produit()) {
+    <h2>{{ produit().nom }}</h2>
+
+    <img [src]="produit().url" style="max-width: 250px; margin: 20px 0; border-radius: 10px" />
+
+    <div>
+      <input type="number" [(ngModel)]="prixPropose" placeholder="Votre estimation" />
+      <button class="success" (click)="valider()">Valider</button>
+    </div>
+
+    @if (resultat()) {
+      <div style="margin-top: 20px">
+        <p>
+          Prix réel : <strong>{{ resultat().prixReel }} €</strong>
+        </p>
+        <p>
+          Points : <strong>{{ resultat().points }}</strong>
+        </p>
+
+        @if (!resultat().termine) {
+          <button (click)="suivant()">Suivant</button>
+        }
+
+        @if (resultat().termine) {
+          <button class="secondary" (click)="allerClassement()">Voir classement</button>
+        }
+      </div>
+    }
+  } @else {
+    <p>Chargement...</p>
+  }
+</div>

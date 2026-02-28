@@ -1,0 +1,31 @@
+<h1>Sessions</h1>
+
+@if (auth.isAdmin()) {
+  <div class="card">
+    <h3>Créer une session</h3>
+
+    <input type="text" [(ngModel)]="nouvelleSession" placeholder="Nom session" />
+
+    <button class="success" (click)="creer()">Créer</button>
+  </div>
+}
+
+@for (s of sessions(); track s.id) {
+  <div class="card" [class.joined]="estParticipant(s)">
+    <h3>
+      {{ s.nom }}
+
+      @if (estParticipant(s)) {
+        <span class="badge">Rejointe</span>
+      }
+    </h3>
+
+    @if (!estParticipant(s)) {
+      <button (click)="rejoindre(s.id)">Rejoindre</button>
+    }
+
+    <button class="secondary" [disabled]="!estParticipant(s)" (click)="jouer(s.id)">Jouer</button>
+
+    <button class="success" (click)="voirClassement(s.id)">Classement</button>
+  </div>
+}
